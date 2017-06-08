@@ -21,6 +21,7 @@ az network public-ip show -n webapp-pip -o tsv --query ipAddress | tee ./websv0-
 
 #- インストーラをVMに送って実行
 ssh-keyscan $(cat websv0-public-ip) | tee -a ~/.ssh/known_hosts
+head ./websv/websv-install.sh
 scp -pq ./websv/websv-install.sh \
     devops@$(cat websv0-public-ip):/tmp/websv-install.sh
 ssh -nT devops@$(cat ./websv0-public-ip) "sudo /tmp/websv-install.sh"
